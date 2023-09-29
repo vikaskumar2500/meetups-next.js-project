@@ -6,6 +6,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import Head from "next/head";
 
 const DetailsPage = ({ meetup }) => {
+
   return (
     <React.Fragment>
       <Head>
@@ -43,7 +44,7 @@ export const getStaticPaths = async () => {
   return {
     // added dynamics paths
     paths: paramsPaths,
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
