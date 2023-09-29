@@ -1,10 +1,23 @@
 "use client";
+
 import React from "react";
 import MeetupDetails from "../../components/meetups/MeetupDetails";
 import { MongoClient, ObjectId } from "mongodb";
+import Head from "next/head";
 
 const DetailsPage = ({ meetup }) => {
-  return <MeetupDetails meetup={meetup} />;
+  return (
+    <React.Fragment>
+      <Head>
+        <title>{meetup.title}</title>
+        <meta
+          title="description"
+          content="You can see your meetup details here!"
+        />
+      </Head>
+      <MeetupDetails meetup={meetup} />
+    </React.Fragment>
+  );
 };
 
 export const getStaticPaths = async () => {
@@ -47,7 +60,7 @@ export const getStaticProps = async (context) => {
   const meetup = await meetupsCollection.findOne({
     _id: new ObjectId(meetupId),
   });
-  
+
   client.close();
 
   return {
